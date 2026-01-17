@@ -4,3 +4,7 @@
     name: docker
     state: started
     enabled: true
+
+- name: Start Plex container
+  ansible.builtin.command:
+    cmd: docker compose -f /opt/plex/docker-compose.yml up -d

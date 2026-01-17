@@ -30,9 +30,4 @@
         owner: root
         group: root
         mode: "0644"
-
-    - name: Start Plex container
-      ansible.builtin.command:
-        cmd: docker compose -f /opt/plex/docker-compose.yml up -d
-      register: plex_compose
-      changed_when: "'Creating' in plex_compose.stdout or 'Recreating' in plex_compose.stdout"
+      notify: Start Plex container

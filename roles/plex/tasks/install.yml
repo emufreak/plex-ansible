@@ -54,8 +54,4 @@
       - docker-compose-plugin
     state: present
     update_cache: true
-
-- name: Trigger Docker service handler
-  ansible.builtin.command: /bin/true
-  changed_when: true
   notify: Ensure Docker service is enabled and running
