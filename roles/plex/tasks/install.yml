@@ -9,11 +9,6 @@
     state: present
     update_cache: true
 
-- name: Set Docker repository details for Ubuntu
-  ansible.builtin.set_fact:
-    docker_repo_url: https://download.docker.com/linux/ubuntu
-  when: ansible_distribution == "Ubuntu"
-
 - name: Set Docker repository details for Debian/Raspberry Pi OS
   ansible.builtin.set_fact:
     docker_repo_url: "{{ 'https://download.docker.com/linux/raspbian' if ansible_distribution == 'Raspbian' else 'https://download.docker.com/linux/debian' }}"
