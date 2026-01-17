@@ -2,8 +2,6 @@
 - name: Set up Plex in Docker
   hosts: plex
   become: true
-  vars_files:
-    - defaults/main.yml
   tasks:
     - name: Install prerequisite packages
       ansible.builtin.apt:
