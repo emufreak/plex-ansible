@@ -5,8 +5,8 @@
   ansible.builtin.file:
     path: "{{ item }}"
     state: directory
-    owner: root
-    group: root
+    owner: plex
+    group: plex
     mode: "0755"
   loop:
     - /opt/plex/config
@@ -16,8 +16,8 @@
   ansible.builtin.file:
     path: "{{ media_mountpoint }}/{{ item }}"
     state: directory
-    owner: root
-    group: root
+    owner: plex
+    group: plex
     mode: "0755"
   loop: "{{ media_subfolders }}"
 
