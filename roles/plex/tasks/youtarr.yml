@@ -1,0 +1,15 @@
+---
+- name: Ensure Youtarr directories exist
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+  loop:
+    - "{{ youtarr_base_dir }}"
+    - "{{ youtarr_base_dir }}/config"
+    - "{{ youtarr_base_dir }}/jobs"
+    - "{{ youtarr_base_dir }}/server/images"
+    - "{{ youtarr_base_dir }}/database"
+    - "{{ youtarr_youtube_output_dir }}"

@@ -16,3 +16,65 @@ services:
       - {{ media_mountpoint }}/{{ item }}:/{{ item }}
 {% endfor %}
     restart: unless-stopped
+
+  youtarr-db:
+    image: mariadb:10.3
+    container_name: youtarr-db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: "{{ youtarr_db_root_password }}"
+      MYSQL_DATABASE: "{{ youtarr_db_name }}"
+      MYSQL_TCP_PORT: "3221"
+      MYSQL_CHARSET: utf8mb4
+      MYSQL_COLLATION: utf8mb4_unicode_ci
+    ports:
+      - "{{ youtarr_db_port }}:{{ youtarr_db_port }}"
+    volumes:
+      - {{ youtarr_base_dir }}/database:/var/lib/mysql
+    command: >-
+      --port={{ youtarr_db_port }}
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_unicode_ci
+      --innodb-file-per-table=1
+      --innodb-large-prefix=ON
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-P", "{{ youtarr_db_port }}", "-u", "root", "-p{{ youtarr_db_root_password }}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  youtarr:
+    image: {{ youtarr_image }}
+    container_name: youtarr
+    restart: unless-stopped
+    user: "{{ youtarr_uid }}:{{ youtarr_gid }}"
+    depends_on:
+      youtarr-db:
+        condition: service_healthy
+    environment:
+      IN_DOCKER_CONTAINER: 1
+      TZ: "{{ youtarr_timezone }}"
+      DB_HOST: youtarr-db
+      DB_PORT: "{{ youtarr_db_port }}"
+      DB_USER: root
+      DB_PASSWORD: "{{ youtarr_db_root_password }}"
+      DB_NAME: "{{ youtarr_db_name }}"
+      AUTH_ENABLED: "{{ youtarr_auth_enabled }}"
+      AUTH_PRESET_USERNAME: "{{ youtarr_auth_preset_username }}"
+      AUTH_PRESET_PASSWORD: "{{ youtarr_auth_preset_password }}"
+      LOG_LEVEL: "{{ youtarr_log_level }}"
+      YOUTUBE_OUTPUT_DIR: "{{ youtarr_youtube_output_dir }}"
+    ports:
+      - "3087:3011"
+    volumes:
+      - {{ youtarr_youtube_output_dir }}:/usr/src/app/data
+      - {{ youtarr_base_dir }}/server/images:/app/server/images
+      - {{ youtarr_base_dir }}/config:/app/config
+      - {{ youtarr_base_dir }}/jobs:/app/jobs
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "--silent", "--show-error", "--output", "/dev/null", "http://localhost:3011/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
