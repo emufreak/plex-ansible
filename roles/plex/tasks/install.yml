@@ -9,10 +9,15 @@
     state: present
     update_cache: true
 
-- name: Set Docker repository details for Debian/Raspberry Pi OS
+- name: Set Docker repository details for Debian/Raspberry Pi OS/Ubuntu
   ansible.builtin.set_fact:
-    docker_repo_url: "{{ 'https://download.docker.com/linux/raspbian' if ansible_distribution == 'Raspbian' else 'https://download.docker.com/linux/debian' }}"
-  when: ansible_distribution in ["Debian", "Raspbian"]
+    docker_repo_url: "{{ docker_repo_map[ansible_distribution] }}"
+  vars:
+    docker_repo_map:
+      Debian: https://download.docker.com/linux/debian
+      Raspbian: https://download.docker.com/linux/raspbian
+      Ubuntu: https://download.docker.com/linux/ubuntu
+  when: ansible_distribution in ["Debian", "Raspbian", "Ubuntu"]
 
 - name: Set Docker GPG key URL
   ansible.builtin.set_fact:
