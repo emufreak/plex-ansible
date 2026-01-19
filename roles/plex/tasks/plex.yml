@@ -1,5 +1,19 @@
 ---
 
+- name: Ensure Plex group exists
+  ansible.builtin.group:
+    name: plex
+    gid: "{{ plex_group_id }}"
+    system: true
+
+- name: Ensure Plex user exists
+  ansible.builtin.user:
+    name: plex
+    uid: "{{ plex_user_id }}"
+    group: plex
+    system: true
+    create_home: false
+
 
 - name: Ensure Plex directories exist
   ansible.builtin.file:
