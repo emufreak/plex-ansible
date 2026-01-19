@@ -11,10 +11,9 @@ services:
       - VERSION={{ plex_version }}
     volumes:
       - /opt/plex/config:/config
-      - {{ media_mountpoint }}/movies:/data/movies
-      - {{ media_mountpoint }}/series:/data/tv
-      - {{ media_mountpoint }}/music:/data/music
-      - {{ media_mountpoint }}/photos:/data/photos
+{% for item in media_subfolders %}
+      - {{ media_mountpoint }}/{{ item }}:/{{ item }}
+{% endfor %}
     restart: unless-stopped
 
   youtarr-db:
