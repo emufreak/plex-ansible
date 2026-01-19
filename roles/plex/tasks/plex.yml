@@ -1,33 +1,31 @@
 ---
-- name: Set up Plex in Docker
-  hosts: plex
-  become: true
-  tasks:
-    - name: Ensure Plex directories exist
-      ansible.builtin.file:
-        path: "{{ item }}"
-        state: directory
-        owner: root
-        group: root
-        mode: "0755"
-      loop:
-        - /opt/plex/config
-        - /opt/plex
 
-    - name: Ensure media directories exist on mountpoint
-      ansible.builtin.file:
-        path: "{{ media_mountpoint }}/{{ item }}"
-        state: directory
-        owner: root
-        group: root
-        mode: "0755"
-      loop: "{{ media_subfolders }}"
 
-    - name: Render docker-compose configuration
-      ansible.builtin.template:
-        src: templates/opt/plex/docker-compose.yml.j2
-        dest: /opt/plex/docker-compose.yml
-        owner: root
-        group: root
-        mode: "0644"
-      notify: Start Plex container
+- name: Ensure Plex directories exist
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+  loop:
+    - /opt/plex/config
+    - /opt/plex
+
+- name: Ensure media directories exist on mountpoint
+  ansible.builtin.file:
+    path: "{{ media_mountpoint }}/{{ item }}"
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+  loop: "{{ media_subfolders }}"
+
+- name: Render docker-compose configuration
+  ansible.builtin.template:
+    src: templates/opt/plex/docker-compose.yml.j2
+    dest: /opt/plex/docker-compose.yml
+    owner: root
+    group: root
+    mode: "0644"
+  notify: Start Plex container
