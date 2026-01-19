@@ -2,5 +2,8 @@
 - name: Install Docker
   ansible.builtin.include_tasks: install.yml
 
+- name: Run Youtarr tasks
+  ansible.builtin.include_tasks: youtarr.yml
+
 - name: Run Plex tasks
   ansible.builtin.include_tasks: plex.yml
