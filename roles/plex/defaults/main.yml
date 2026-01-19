@@ -1,11 +1,13 @@
 ---
-plex_user_id: 1000
-plex_group_id: 1000
+plex_user_id: 2000
+plex_group_id: 2000
 plex_timezone: Etc/UTC
 plex_version: docker
 media_mountpoint: /media
 media_subfolders:
   - movies
-  - series
+  - tv
   - music
   - photos
+  - pictures
+  - transcode
