@@ -11,3 +11,17 @@ media_subfolders:
   - photos
   - pictures
   - transcode
+  - youtube
+
+youtarr_base_dir: /opt/plex/youtarr
+youtarr_youtube_output_dir: /media/youtube
+youtarr_uid: 2000
+youtarr_gid: 2000
+youtarr_timezone: Etc/UTC
+youtarr_db_name: youtarr
+youtarr_db_port: 3221
+youtarr_image: dialmaster/youtarr:latest
+youtarr_auth_enabled: ""
+youtarr_auth_preset_username: ""
+youtarr_auth_preset_password: ""
+youtarr_log_level: info
