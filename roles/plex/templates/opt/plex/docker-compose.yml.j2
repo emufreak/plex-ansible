@@ -17,6 +17,21 @@ services:
 {% endfor %}
     restart: unless-stopped
 
+  sonarr:
+    image: lscr.io/linuxserver/sonarr:latest
+    container_name: sonarr
+    environment:
+      - PUID={{ plex_user_id }}
+      - PGID={{ plex_group_id }}
+      - TZ={{ plex_timezone }}
+    volumes:
+      - /opt/plex/sonarr:/config
+      - /media/tv:/tv
+      - {{ media_mountpoint }}/downloads:/downloads
+    ports:
+      - 8989:8989
+    restart: unless-stopped
+
   youtarr-db:
     image: mariadb:10.3
     container_name: youtarr-db
