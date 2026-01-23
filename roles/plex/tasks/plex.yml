@@ -10,7 +10,7 @@
   ansible.builtin.user:
     name: plex
     uid: "{{ plex_user_id }}"
-    group: plex
+    group: "{{ plex_group_id}}"
     system: true
     create_home: false
 
