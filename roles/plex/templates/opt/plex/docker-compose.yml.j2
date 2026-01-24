@@ -32,6 +32,19 @@ services:
       - 8989:8989
     restart: unless-stopped
 
+  prowlarr:
+    image: {{ prowlarr_image }}
+    container_name: prowlarr
+    environment:
+      - PUID={{ plex_user_id }}
+      - PGID={{ plex_group_id }}
+      - TZ={{ plex_timezone }}
+    volumes:
+      - {{ prowlarr_base_dir }}/config:/config
+    ports:
+      - {{ prowlarr_port }}:9696
+    restart: unless-stopped
+
   youtarr-db:
     image: mariadb:10.3
     container_name: youtarr-db
