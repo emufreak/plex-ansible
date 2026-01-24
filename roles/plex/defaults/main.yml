@@ -1,8 +1,4 @@
 ---
-plex_user_id: 2000
-plex_group_id: 2000
-plex_timezone: Etc/UTC
-plex_version: docker
 media_mountpoint: /media
 media_subfolders:
   - movies
@@ -13,16 +9,24 @@ media_subfolders:
   - downloads
   - transcode
   - youtube
+  - downloads
 
-youtarr_base_dir: /opt/plex/youtarr
-youtarr_youtube_output_dir: /media/youtube
-youtarr_uid: 2000
-youtarr_gid: 2000
-youtarr_timezone: Etc/UTC
-youtarr_db_name: youtarr
-youtarr_db_port: 3221
-youtarr_image: dialmaster/youtarr:latest
+plex_group_id: 2000
+plex_timezone: Etc/UTC
+plex_user_id: 2000
+plex_version: docker
+
+sonarr_base_dir: /opt/plex/sonarr
+
 youtarr_auth_enabled: ""
 youtarr_auth_preset_username: ""
 youtarr_auth_preset_password: ""
 youtarr_log_level: info
+youtarr_base_dir: /opt/plex/youtarr
+youtarr_db_name: youtarr
+youtarr_db_port: 3221
+youtarr_gid: 2000
+youtarr_image: dialmaster/youtarr:latest
+youtarr_timezone: Etc/UTC
+youtarr_uid: 2000
+youtarr_youtube_output_dir: /media/youtube

@@ -23,9 +23,10 @@
     group: plex
     mode: "0755"
   loop:
-    - /opt/plex/config
-    - /opt/plex/sonarr
     - /opt/plex
+    - /opt/plex/plex
+    - /opt/plex/plex/config
+
 
 - name: Ensure media directories exist on mountpoint
   ansible.builtin.file:

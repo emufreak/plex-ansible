@@ -11,7 +11,7 @@ services:
       - TZ={{ plex_timezone }}
       - VERSION={{ plex_version }}
     volumes:
-      - /opt/plex/config:/config
+      - /opt/plex/plex/config:/config
 {% for item in media_subfolders %}
       - {{ media_mountpoint }}/{{ item }}:/{{ item }}
 {% endfor %}
@@ -25,8 +25,8 @@ services:
       - PGID={{ plex_group_id }}
       - TZ={{ plex_timezone }}
     volumes:
-      - /opt/plex/sonarr:/config
-      - /media/tv:/tv
+      - {{ sonarr_base_dir }}/config:/config
+      - {{ media_mountpoint }}/tv:/tv
       - {{ media_mountpoint }}/downloads:/downloads
     ports:
       - 8989:8989

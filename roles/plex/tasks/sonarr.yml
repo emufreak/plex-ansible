@@ -1,0 +1,11 @@
+---
+- name: Ensure Sonarr directories exist
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    owner: plex
+    group: plex
+    mode: "0755"
+  loop:
+    - "{{ sonarr_base_dir }}"
+    - "{{ sonarr_base_dir }}/config"
