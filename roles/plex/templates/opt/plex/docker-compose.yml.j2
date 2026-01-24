@@ -51,6 +51,36 @@ services:
     networks:
       - plex_network
 
+  proton-privoxy:
+    image: {{ proton_privoxy_image }}
+    container_name: proton-privoxy
+    environment:
+      - PVPN_USERNAME={{ proton_privoxy_username }}
+      - PVPN_PASSWORD={{ proton_privoxy_password }}
+      - PVPN_TIER={{ proton_privoxy_tier }}
+      - PVPN_PROTOCOL={{ proton_privoxy_protocol }}
+      - PVPN_CMD_ARGS={{ proton_privoxy_cmd_args }}
+{% if proton_privoxy_debug %}
+      - PVPN_DEBUG={{ proton_privoxy_debug }}
+{% endif %}
+{% if proton_privoxy_host_network %}
+      - HOST_NETWORK={{ proton_privoxy_host_network }}
+{% endif %}
+{% if proton_privoxy_dns_servers_override %}
+      - DNS_SERVERS_OVERRIDE={{ proton_privoxy_dns_servers_override }}
+{% endif %}
+    volumes:
+      - {{ proton_privoxy_base_dir }}:/config
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - {{ proton_privoxy_port }}:8080
+    devices:
+      - /dev/net/tun
+    cap_add:
+      - NET_ADMIN
+    restart: unless-stopped
+    networks:
+      - plex_network
 
   qbittorrent:
     image: {{ qbittorrent_image }}

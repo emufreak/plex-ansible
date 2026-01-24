@@ -8,6 +8,9 @@
 - name: Run Prowlarr tasks
   ansible.builtin.include_tasks: prowlarr.yml
 
+- name: Run Proton Privoxy tasks
+  ansible.builtin.include_tasks: proton_privoxy.yml
+
 - name: Run qBittorrent tasks
   ansible.builtin.include_tasks: qbittorrent.yml
 
