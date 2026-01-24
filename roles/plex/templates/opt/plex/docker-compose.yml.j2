@@ -51,29 +51,26 @@ services:
     networks:
       - plex_network
 
-  proton-privoxy:
-    image: {{ proton_privoxy_image }}
-    container_name: proton-privoxy
+  gluetun:
+    image: {{ gluetun_image }}
+    container_name: gluetun
     environment:
-      - PVPN_USERNAME={{ proton_privoxy_username }}
-      - PVPN_PASSWORD={{ proton_privoxy_password }}
-      - PVPN_TIER={{ proton_privoxy_tier }}
-      - PVPN_PROTOCOL={{ proton_privoxy_protocol }}
-      - PVPN_CMD_ARGS={{ proton_privoxy_cmd_args }}
-{% if proton_privoxy_debug %}
-      - PVPN_DEBUG={{ proton_privoxy_debug }}
-{% endif %}
-{% if proton_privoxy_host_network %}
-      - HOST_NETWORK={{ proton_privoxy_host_network }}
-{% endif %}
-{% if proton_privoxy_dns_servers_override %}
-      - DNS_SERVERS_OVERRIDE={{ proton_privoxy_dns_servers_override }}
+      - VPN_SERVICE_PROVIDER={{ gluetun_vpn_service_provider }}
+      - VPN_TYPE={{ gluetun_vpn_type }}
+      - OPENVPN_USER={{ gluetun_username }}
+      - OPENVPN_PASSWORD={{ gluetun_password }}
+      - SERVER_TIERS={{ gluetun_tier }}
+      - OPENVPN_PROTOCOL={{ gluetun_protocol }}
+      - HTTPPROXY={{ gluetun_http_proxy_enabled }}
+      - HTTPPROXY_LISTENING_ADDRESS=0.0.0.0:{{ gluetun_http_proxy_port }}
+{% if gluetun_server_countries %}
+      - SERVER_COUNTRIES={{ gluetun_server_countries }}
 {% endif %}
     volumes:
-      - {{ proton_privoxy_base_dir }}:/config
+      - {{ gluetun_base_dir }}/config:/gluetun
       - /etc/localtime:/etc/localtime:ro
     ports:
-      - {{ proton_privoxy_port }}:8080
+      - {{ gluetun_http_proxy_port }}:{{ gluetun_http_proxy_port }}
     devices:
       - /dev/net/tun
     cap_add:
