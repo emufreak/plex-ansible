@@ -51,6 +51,38 @@ services:
     networks:
       - plex_network
 
+
+  qbittorrent:
+    image: {{ qbittorrent_image }}
+    container_name: qbittorrent
+    privileged: true
+    environment:
+      - PUID={{ plex_user_id }}
+      - PGID={{ plex_group_id }}
+      - TZ={{ plex_timezone }}
+      - WEBUI_PORT={{ qbittorrent_webui_port }}
+      - TORRENTING_PORT={{ qbittorrent_torrent_port }}
+      - VPN_ENABLED={{ qbittorrent_vpn_enabled }}
+      - VPN_TYPE={{ qbittorrent_vpn_type }}
+      - VPN_USERNAME={{ qbittorrent_vpn_username | default("") }}
+      - VPN_PASSWORD={{ qbittorrent_vpn_password | default("") }}
+      - LAN_NETWORK={{ qbittorrent_lan_network }}
+      - NAME_SERVERS={{ qbittorrent_name_servers }}
+      - UMASK={{ qbittorrent_umask }}
+      - HEALTH_CHECK_HOST={{ qbittorrent_health_check_host }}
+      - HEALTH_CHECK_INTERVAL={{ qbittorrent_health_check_interval }}
+      - HEALTH_CHECK_SILENT={{ qbittorrent_health_check_silent }}
+    volumes:
+      - {{ qbittorrent_base_dir }}/config:/config
+      - {{ media_mountpoint }}/downloads:/downloads
+    ports:
+      - {{ qbittorrent_webui_port }}:{{ qbittorrent_webui_port }}
+      - {{ qbittorrent_torrent_port }}:{{ qbittorrent_torrent_port }}
+      - {{ qbittorrent_torrent_port }}:{{ qbittorrent_torrent_port }}/udp
+    restart: unless-stopped
+    networks:
+      - plex_network
+
   youtarr-db:
     image: mariadb:10.3
     container_name: youtarr-db

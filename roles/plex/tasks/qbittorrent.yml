@@ -1,0 +1,13 @@
+---
+- name: Ensure qBittorrent directories exist
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    owner: plex
+    group: plex
+    mode: "0755"
+  loop:
+    - "{{ qbittorrent_base_dir }}"
+    - "{{ qbittorrent_base_dir }}/config"
+    - "{{ qbittorrent_base_dir }}/config/openvpn"
+    - "{{ qbittorrent_base_dir }}/config/wireguard"
