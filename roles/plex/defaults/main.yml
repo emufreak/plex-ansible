@@ -16,17 +16,21 @@ plex_timezone: Etc/UTC
 plex_user_id: 2000
 plex_version: docker
 
+prowlarr_base_dir: /opt/plex/prowlarr
+prowlarr_image: lscr.io/linuxserver/prowlarr:latest
+prowlarr_port: 9696
+
 sonarr_base_dir: /opt/plex/sonarr
 
 youtarr_auth_enabled: ""
-youtarr_auth_preset_username: ""
 youtarr_auth_preset_password: ""
-youtarr_log_level: info
+youtarr_auth_preset_username: ""
 youtarr_base_dir: /opt/plex/youtarr
 youtarr_db_name: youtarr
 youtarr_db_port: 3221
 youtarr_gid: 2000
 youtarr_image: dialmaster/youtarr:latest
+youtarr_log_level: info
 youtarr_timezone: Etc/UTC
 youtarr_uid: 2000
 youtarr_youtube_output_dir: /media/youtube

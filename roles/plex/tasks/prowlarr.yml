@@ -1,0 +1,11 @@
+---
+- name: Ensure Prowlarr directories exist
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    owner: plex
+    group: plex
+    mode: "0755"
+  loop:
+    - "{{ prowlarr_base_dir }}"
+    - "{{ prowlarr_base_dir }}/config"
