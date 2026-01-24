@@ -11,9 +11,9 @@ media_subfolders:
   - youtube
   - downloads
 
-plex_group_id: 2000
+plex_group_id: "2000"
 plex_timezone: Etc/UTC
-plex_user_id: 2000
+plex_user_id: "2000"
 plex_version: docker
 
 prowlarr_base_dir: /opt/plex/prowlarr
@@ -24,7 +24,8 @@ qbittorrent_base_dir: /opt/plex/qbittorrent
 qbittorrent_health_check_host: one.one.one.one
 qbittorrent_health_check_interval: 300
 qbittorrent_health_check_silent: "1"
-qbittorrent_image: dyonr/qbittorrentvpn:latest
+# qbittorrent_image: dyonr/qbittorrentvpn:latest
+qbittorrent_image: linuxserver/qbittorrent:latest
 qbittorrent_lan_network: 192.168.1.0/24
 qbittorrent_name_servers: 1.1.1.1,1.0.0.1
 qbittorrent_torrent_port: 8999
@@ -39,13 +40,13 @@ youtarr_auth_enabled: ""
 youtarr_auth_preset_password: ""
 youtarr_auth_preset_username: ""
 youtarr_base_dir: /opt/plex/youtarr
-youtarr_db_gid: 999
+youtarr_db_gid: "999"
 youtarr_db_name: youtarr
 youtarr_db_port: 3221
-youtarr_db_uid: 999
-youtarr_gid: 2000
+youtarr_db_uid: "999"
+youtarr_gid: "2000"
 youtarr_image: dialmaster/youtarr:latest
 youtarr_log_level: info
 youtarr_timezone: Etc/UTC
-youtarr_uid: 2000
+youtarr_uid: "2000"
 youtarr_youtube_output_dir: /media/youtube
