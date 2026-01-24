@@ -11,5 +11,12 @@
     - "{{ youtarr_base_dir }}/config"
     - "{{ youtarr_base_dir }}/jobs"
     - "{{ youtarr_base_dir }}/server/images"
-    - "{{ youtarr_base_dir }}/database"
     - "{{ youtarr_youtube_output_dir }}"
+
+- name: Ensure Youtarr database directory exists with MariaDB ownership
+  ansible.builtin.file:
+    path: "{{ youtarr_base_dir }}/database"
+    state: directory
+    owner: "{{ youtarr_db_uid }}"
+    group: "{{ youtarr_db_gid }}"
+    mode: "0755"
