@@ -8,5 +8,8 @@
 - name: Run Prowlarr tasks
   ansible.builtin.include_tasks: prowlarr.yml
 
+- name: Run qBittorrent tasks
+  ansible.builtin.include_tasks: qbittorrent.yml
+
 - name: Run Youtarr tasks
   ansible.builtin.include_tasks: youtarr.yml

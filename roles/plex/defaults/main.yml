@@ -20,6 +20,19 @@ prowlarr_base_dir: /opt/plex/prowlarr
 prowlarr_image: lscr.io/linuxserver/prowlarr:latest
 prowlarr_port: 9696
 
+qbittorrent_base_dir: /opt/plex/qbittorrent
+qbittorrent_health_check_host: one.one.one.one
+qbittorrent_health_check_interval: 300
+qbittorrent_health_check_silent: "1"
+qbittorrent_image: dyonr/qbittorrentvpn:latest
+qbittorrent_lan_network: 192.168.1.0/24
+qbittorrent_name_servers: 1.1.1.1,1.0.0.1
+qbittorrent_torrent_port: 8999
+qbittorrent_umask: "002"
+qbittorrent_vpn_enabled: "yes"
+qbittorrent_vpn_type: openvpn
+qbittorrent_webui_port: 8080
+
 sonarr_base_dir: /opt/plex/sonarr
 
 youtarr_auth_enabled: ""
