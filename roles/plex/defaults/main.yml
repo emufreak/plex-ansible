@@ -26,8 +26,10 @@ youtarr_auth_enabled: ""
 youtarr_auth_preset_password: ""
 youtarr_auth_preset_username: ""
 youtarr_base_dir: /opt/plex/youtarr
+youtarr_db_gid: 999
 youtarr_db_name: youtarr
 youtarr_db_port: 3221
+youtarr_db_uid: 999
 youtarr_gid: 2000
 youtarr_image: dialmaster/youtarr:latest
 youtarr_log_level: info
