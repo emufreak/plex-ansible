@@ -1,0 +1,11 @@
+---
+- name: Ensure Gluetun directories exist
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    owner: plex
+    group: plex
+    mode: "0755"
+  loop:
+    - "{{ gluetun_base_dir }}"
+    - "{{ gluetun_base_dir }}/config"
