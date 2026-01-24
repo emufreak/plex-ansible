@@ -16,6 +16,8 @@ services:
       - {{ media_mountpoint }}/{{ item }}:/{{ item }}
 {% endfor %}
     restart: unless-stopped
+    networks:
+      - plex_network
 
   sonarr:
     image: lscr.io/linuxserver/sonarr:latest
@@ -31,6 +33,8 @@ services:
     ports:
       - 8989:8989
     restart: unless-stopped
+    networks:
+      - plex_network
 
   prowlarr:
     image: {{ prowlarr_image }}
@@ -44,6 +48,8 @@ services:
     ports:
       - {{ prowlarr_port }}:9696
     restart: unless-stopped
+    networks:
+      - plex_network
 
   youtarr-db:
     image: mariadb:10.3
@@ -71,6 +77,8 @@ services:
       timeout: 5s
       retries: 5
       start_period: 30s
+    networks:
+      - plex_network
 
   youtarr:
     image: {{ youtarr_image }}
@@ -106,3 +114,9 @@ services:
       timeout: 10s
       retries: 3
       start_period: 40s
+    networks:
+      - plex_network
+
+networks:
+  plex_network:
+    name: plex_network
