@@ -20,6 +20,18 @@ prowlarr_base_dir: /opt/plex/prowlarr
 prowlarr_image: lscr.io/linuxserver/prowlarr:latest
 prowlarr_port: 9696
 
+proton_privoxy_base_dir: /opt/plex/proton-privoxy
+proton_privoxy_cmd_args: "connect --fastest"
+proton_privoxy_debug: ""
+proton_privoxy_dns_servers_override: ""
+proton_privoxy_host_network: ""
+proton_privoxy_image: walt3rl/proton-privoxy:latest
+proton_privoxy_password: ""
+proton_privoxy_port: 8888
+proton_privoxy_protocol: udp
+proton_privoxy_tier: "2"
+proton_privoxy_username: ""
+
 qbittorrent_base_dir: /opt/plex/qbittorrent
 qbittorrent_health_check_host: one.one.one.one
 qbittorrent_health_check_interval: 300
