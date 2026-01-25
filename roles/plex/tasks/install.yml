@@ -6,50 +6,9 @@
       - curl
       - gnupg
       - lsb-release
+      - extrepo
     state: present
     update_cache: true
-
-- name: Set Docker repository details for Debian/Raspberry Pi OS/Ubuntu
-  ansible.builtin.set_fact:
-    docker_repo_url: "{{ docker_repo_map[ansible_distribution] }}"
-  vars:
-    docker_repo_map:
-      Debian: https://download.docker.com/linux/debian
-      Raspbian: https://download.docker.com/linux/raspbian
-      Ubuntu: https://download.docker.com/linux/ubuntu
-  when: ansible_distribution in ["Debian", "Raspbian", "Ubuntu"]
-
-- name: Set Docker GPG key URL
-  ansible.builtin.set_fact:
-    docker_repo_gpg_url: "{{ docker_repo_url }}/gpg"
-
-- name: Set Docker architecture for repository
-  ansible.builtin.set_fact:
-    docker_repo_arch: "{{ docker_arch_map.get(ansible_architecture, 'amd64') }}"
-  vars:
-    docker_arch_map:
-      x86_64: amd64
-      aarch64: arm64
-      armv7l: armhf
-      armv6l: armhf
-
-- name: Ensure apt keyrings directory exists
-  ansible.builtin.file:
-    path: /etc/apt/keyrings
-    state: directory
-    mode: "0755"
-
-- name: Add Docker GPG key
-  ansible.builtin.apt_key:
-    url: "{{ docker_repo_gpg_url }}"
-    keyring: /etc/apt/keyrings/docker.gpg
-    state: present
-
-- name: Add Docker repository
-  ansible.builtin.apt_repository:
-    repo: "deb [arch={{ docker_repo_arch }} signed-by=/etc/apt/keyrings/docker.gpg] {{ docker_repo_url }} {{ ansible_distribution_release }} stable"
-    state: present
-    filename: docker
 
 - name: Install Docker packages
   ansible.builtin.apt:
