@@ -33,14 +33,21 @@
       armv7l: armhf
       armv6l: armhf
 
+- name: Ensure apt keyrings directory exists
+  ansible.builtin.file:
+    path: /etc/apt/keyrings
+    state: directory
+    mode: "0755"
+
 - name: Add Docker GPG key
   ansible.builtin.apt_key:
     url: "{{ docker_repo_gpg_url }}"
+    keyring: /etc/apt/keyrings/docker.gpg
     state: present
 
 - name: Add Docker repository
   ansible.builtin.apt_repository:
-    repo: "deb [arch={{ docker_repo_arch }}] {{ docker_repo_url }} {{ ansible_distribution_release }} stable"
+    repo: "deb [arch={{ docker_repo_arch }} signed-by=/etc/apt/keyrings/docker.gpg] {{ docker_repo_url }} {{ ansible_distribution_release }} stable"
     state: present
     filename: docker
 
