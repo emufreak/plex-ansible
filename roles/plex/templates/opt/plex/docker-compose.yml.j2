@@ -59,16 +59,8 @@ services:
       - VPN_TYPE={{ gluetun_vpn_type }}
       - OPENVPN_USER={{ gluetun_username }}
       - OPENVPN_PASSWORD={{ gluetun_password }}
-      - SERVER_TIERS={{ gluetun_tier }}
-      - OPENVPN_PROTOCOL={{ gluetun_protocol }}
-      - HTTPPROXY={{ gluetun_http_proxy_enabled }}
-      - HTTPPROXY_LISTENING_ADDRESS=0.0.0.0:{{ gluetun_http_proxy_port }}
-{% if gluetun_server_countries %}
-      - SERVER_COUNTRIES={{ gluetun_server_countries }}
-{% endif %}
     volumes:
       - {{ gluetun_base_dir }}/config:/gluetun
-      - /etc/localtime:/etc/localtime:ro
     ports:
       - {{ gluetun_http_proxy_port }}:{{ gluetun_http_proxy_port }}
     devices:

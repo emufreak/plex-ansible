@@ -14,12 +14,7 @@ media_subfolders:
 gluetun_base_dir: /opt/plex/gluetun
 gluetun_http_proxy_enabled: "on"
 gluetun_http_proxy_port: 8888
-gluetun_image: qdm12/gluetun:latest
-gluetun_password: ""
-gluetun_protocol: udp
-gluetun_server_countries: ""
-gluetun_tier: "2"
-gluetun_username: ""
+gluetun_image: qmcgaw/gluetun:latest
 gluetun_vpn_service_provider: protonvpn
 gluetun_vpn_type: openvpn
 
