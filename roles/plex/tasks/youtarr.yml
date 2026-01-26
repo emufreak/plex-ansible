@@ -13,6 +13,7 @@
     - "{{ youtarr_base_dir }}/server/images"
     - "{{ youtarr_youtube_output_dir }}"
 
+
 - name: Ensure Youtarr database directory exists with MariaDB ownership
   ansible.builtin.file:
     path: "{{ youtarr_base_dir }}/database"

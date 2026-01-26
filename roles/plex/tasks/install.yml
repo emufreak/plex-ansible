@@ -6,9 +6,25 @@
       - curl
       - gnupg
       - lsb-release
-      - extrepo
     state: present
     update_cache: true
+
+- name: Create Repository file for docker
+  ansible.builtin.template:
+    src: templates/etc/apt/sources.list.d/docker.sources.j2
+    dest: /etc/apt/sources.list.d/docker.sources
+    owner: root
+    group: root
+    mode: "0644"
+
+- name: Set Docker GPG key URL
+  ansible.builtin.set_fact:
+    docker_repo_gpg_url: "{{ install_docker_repo_url }}/gpg"
+
+- name: Fetch gpg key
+  ansible.builtin.get_url:
+    url: "{{ docker_repo_gpg_url }}"
+    dest: /etc/apt/keyrings/docker.asc
 
 - name: Install Docker packages
   ansible.builtin.apt:

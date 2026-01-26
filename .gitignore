@@ -1,1 +1,1 @@
-inventory/group_vars/localserver/secrets.yml
+inventory/group_vars/mediaserver/secrets.yml

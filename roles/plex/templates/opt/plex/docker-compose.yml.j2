@@ -1,7 +1,7 @@
 ---
 services:
   plex:
-    image: lscr.io/linuxserver/plex:latest
+    image: linuxserver/plex:latest
     container_name: plex
     ports:
       - 32400:32400
@@ -20,7 +20,7 @@ services:
       - plex_network
 
   sonarr:
-    image: lscr.io/linuxserver/sonarr:latest
+    image: linuxserver/sonarr:latest
     container_name: sonarr
     environment:
       - PUID={{ plex_user_id }}
@@ -37,7 +37,7 @@ services:
       - plex_network
 
   prowlarr:
-    image: {{ prowlarr_image }}
+    image: linuxserver/prowlarr:latest
     container_name: prowlarr
     environment:
       - PUID={{ plex_user_id }}
@@ -52,7 +52,7 @@ services:
       - plex_network
 
   gluetun:
-    image: {{ gluetun_image }}
+    image: qmcgaw/gluetun:latest
     container_name: gluetun
     environment:
       - VPN_SERVICE_PROVIDER={{ gluetun_vpn_service_provider }}
@@ -72,7 +72,7 @@ services:
       - plex_network
 
   qbittorrent:
-    image: {{ qbittorrent_image }}
+    image: linuxserver/qbittorrent:latest
     container_name: qbittorrent
     privileged: true
     environment:
@@ -122,7 +122,7 @@ services:
       - plex_network
 
   youtarr:
-    image: {{ youtarr_image }}
+    image:  dialmaster/youtarr:latest
     container_name: youtarr
     restart: unless-stopped
     user: "{{ youtarr_uid }}:{{ youtarr_gid }}"
