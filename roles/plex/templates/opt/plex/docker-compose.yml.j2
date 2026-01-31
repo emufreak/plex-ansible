@@ -3,8 +3,6 @@ services:
   plex:
     image: linuxserver/plex:latest
     container_name: plex
-    ports:
-      - 32400:32400
     environment:
       - PUID={{ plex_user_id }}
       - PGID={{ plex_group_id }}
@@ -16,8 +14,7 @@ services:
       - {{ media_mountpoint }}/{{ item }}:/{{ item }}
 {% endfor %}
     restart: unless-stopped
-    networks:
-      - plex_network
+    network_mode: host
 
   sonarr:
     image: linuxserver/sonarr:latest
@@ -51,30 +48,9 @@ services:
     networks:
       - plex_network
 
-  gluetun:
-    image: qmcgaw/gluetun:latest
-    container_name: gluetun
-    environment:
-      - VPN_SERVICE_PROVIDER={{ gluetun_vpn_service_provider }}
-      - VPN_TYPE={{ gluetun_vpn_type }}
-      - OPENVPN_USER={{ gluetun_username }}
-      - OPENVPN_PASSWORD={{ gluetun_password }}
-    volumes:
-      - {{ gluetun_base_dir }}/config:/gluetun
-    ports:
-      - {{ gluetun_http_proxy_port }}:{{ gluetun_http_proxy_port }}
-    devices:
-      - /dev/net/tun
-    cap_add:
-      - NET_ADMIN
-    restart: unless-stopped
-    networks:
-      - plex_network
-
   qbittorrent:
     image: linuxserver/qbittorrent:latest
     container_name: qbittorrent
-    privileged: true
     environment:
       - PUID={{ plex_user_id }}
       - PGID={{ plex_group_id }}

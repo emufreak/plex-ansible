@@ -1,6 +1,10 @@
 ---
 - name: Install Docker
-  ansible.builtin.include_tasks: install.yml
+  ansible.builtin.include_tasks:
+    file: install.yml
+    apply:
+      tags:
+        - install
 
 - name: Run Plex tasks
   ansible.builtin.include_tasks: plex.yml
