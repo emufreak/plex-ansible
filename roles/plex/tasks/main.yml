@@ -12,6 +12,9 @@
 - name: Run Prowlarr tasks
   ansible.builtin.include_tasks: prowlarr.yml
 
+- name: Run Radarr tasks
+  ansible.builtin.include_tasks: radarr.yml
+
 - name: Run Gluetun tasks
   ansible.builtin.include_tasks: gluetun.yml
 

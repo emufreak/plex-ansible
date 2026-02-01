@@ -27,6 +27,9 @@ plex_version: docker
 prowlarr_base_dir: /opt/plex/prowlarr
 prowlarr_port: 9696
 
+radarr_base_dir: /opt/plex/radarr
+radarr_port: 7878
+
 qbittorrent_base_dir: /opt/plex/qbittorrent
 qbittorrent_health_check_host: one.one.one.one
 qbittorrent_health_check_interval: 300

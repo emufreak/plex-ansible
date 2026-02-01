@@ -1,0 +1,11 @@
+---
+- name: Ensure Radarr directories exist
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    owner: plex
+    group: plex
+    mode: "0755"
+  loop:
+    - "{{ radarr_base_dir }}"
+    - "{{ radarr_base_dir }}/config"
