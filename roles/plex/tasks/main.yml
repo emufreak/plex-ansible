@@ -15,9 +15,6 @@
 - name: Run Radarr tasks
   ansible.builtin.include_tasks: radarr.yml
 
-- name: Run Gluetun tasks
-  ansible.builtin.include_tasks: gluetun.yml
-
 - name: Run qBittorrent tasks
   ansible.builtin.include_tasks: qbittorrent.yml
 
