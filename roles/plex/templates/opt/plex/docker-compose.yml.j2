@@ -48,6 +48,23 @@ services:
     networks:
       - plex_network
 
+  radarr:
+    image: linuxserver/radarr:latest
+    container_name: radarr
+    environment:
+      - PUID={{ plex_user_id }}
+      - PGID={{ plex_group_id }}
+      - TZ={{ plex_timezone }}
+    volumes:
+      - {{ radarr_base_dir }}/config:/config
+      - {{ media_mountpoint }}/movies:/movies
+      - {{ media_mountpoint }}/downloads:/downloads
+    ports:
+      - {{ radarr_port }}:7878
+    restart: unless-stopped
+    networks:
+      - plex_network
+
   qbittorrent:
     image: linuxserver/qbittorrent:latest
     container_name: qbittorrent
