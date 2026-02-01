@@ -13,12 +13,6 @@ media_subfolders:
   - youtube
   - downloads
 
-gluetun_base_dir: /opt/plex/gluetun
-gluetun_http_proxy_enabled: "on"
-gluetun_http_proxy_port: 8888
-gluetun_vpn_service_provider: protonvpn
-gluetun_vpn_type: openvpn
-
 plex_group_id: "2000"
 plex_timezone: Etc/UTC
 plex_user_id: "2000"
